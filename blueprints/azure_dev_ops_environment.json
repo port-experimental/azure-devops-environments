@@ -1,0 +1,32 @@
+{
+  "identifier": "azure_dev_ops_environment",
+  "description": "Azure DevOps Environment",
+  "title": "Azure DevOps Environment",
+  "icon": "AzureDevops",
+  "schema": {
+    "properties": {
+      "test": {
+        "type": "string",
+        "title": "test"
+      }
+    },
+    "required": []
+  },
+  "mirrorProperties": {},
+  "calculationProperties": {},
+  "aggregationProperties": {},
+  "relations": {
+    "pipeline": {
+      "title": "Pipeline",
+      "target": "azureDevopsPipeline",
+      "required": false,
+      "many": true
+    },
+    "project": {
+      "title": "Project",
+      "target": "project",
+      "required": false,
+      "many": false
+    }
+  }
+}

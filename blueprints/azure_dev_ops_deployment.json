@@ -1,0 +1,32 @@
+{
+  "identifier": "azure_dev_ops_deployment",
+  "title": "Azure DevOps Deployment",
+  "icon": "AzureDevops",
+  "schema": {
+    "properties": {},
+    "required": []
+  },
+  "mirrorProperties": {},
+  "calculationProperties": {},
+  "aggregationProperties": {},
+  "relations": {
+    "environment": {
+      "title": "Environment",
+      "target": "azure_dev_ops_environment",
+      "required": false,
+      "many": false
+    },
+    "build": {
+      "title": "Build",
+      "target": "azure_dev_ops_build",
+      "required": false,
+      "many": false
+    },
+    "pipeline": {
+      "title": "Pipeline",
+      "target": "azureDevopsPipeline",
+      "required": false,
+      "many": false
+    }
+  }
+}
