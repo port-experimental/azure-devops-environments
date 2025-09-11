@@ -82,6 +82,17 @@ if not (ADO_ORG and ADO_PAT):
     print("Please set ADO_ORG and ADO_PAT environment variables.")
     sys.exit(1)
 
+def read_projects_from_file(filename="projects.txt"):
+    """
+    Read project names from a file, one project per line.
+    Returns empty list if file doesn't exist or is empty.
+    """
+    try:
+        with open(filename, 'r') as f:
+            return [line.strip() for line in f if line.strip()]
+    except FileNotFoundError:
+        return []
+
 def get_ado_projects():
     """
     Fetch all projects in the Azure DevOps organization.
@@ -121,7 +132,23 @@ def main():
             print(f"Found deployment blueprint: {bp.get('identifier')}")
 
     print("Fetching Azure DevOps Projects...")
-    projects = get_ado_projects()
+    all_projects = get_ado_projects()
+    print(f"Found {len(all_projects)} projects in Azure DevOps")
+    for p in all_projects:
+        print(p.get("name"))
+    
+    print("Reading projects from projects.txt...")
+    project_list = read_projects_from_file()
+    
+    if project_list:
+        print(f"Found {len(project_list)} projects in projects.txt")
+        # Filter projects based on projects.txt
+        projects = [p for p in all_projects if p.get("name") in project_list]
+        print(f"Processing {len(projects)} projects that match projects.txt")
+    else:
+        print("No projects.txt found or file is empty. Processing all projects.")
+        projects = all_projects
+    
     environments = []
     deployments = []
     for project in projects:

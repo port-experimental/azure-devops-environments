@@ -46,13 +46,29 @@ export ADO_PAT="your_pat_token"
 
 ## Usage
 
-Run the script:
+You can run the script in two ways:
 
+1. To process all projects in your organization:
 ```sh
 python get_ado_environments.py
 ```
 
-The script will print the environments as JSON.
+2. To process only specific projects:
+   - Create a file named `projects.txt` in the same directory as the script
+   - Add one project name per line in the file. Project names are case sensitive.
+   - Run the script as normal:
+   ```sh
+   python get_ado_environments.py
+   ```
+
+Example projects.txt:
+```
+MyProject1
+MyProject2
+MyProject3
+```
+
+If projects.txt exists, the script will only process the projects listed in the file that exist in your Azure DevOps organization. If the file doesn't exist or is empty, the script will process all projects in your organization.
 
 ## Creating Port Blueprints
 
